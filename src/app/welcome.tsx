@@ -1,13 +1,14 @@
 /** @format */
 
+import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
 
+import Brand from "@/components/ui/Brand";
 import { Colors, FontSize, Radius, Spacing } from "@/constant/theme";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 
-const HearAbleScreen = () => {
+export default function WelcomeScreen() {
 	const features = [
 		{
 			id: 1,
@@ -27,29 +28,23 @@ const HearAbleScreen = () => {
 			id: 3,
 			title: "Progres Tanpa Tekanan",
 			desc: "Belajar sesuai ritme",
-			icon: <Feather name="clock" size={24} color={Colors.tertiary} />,
-			iconBg: "#F7F3E8",
+			icon: <Feather name="clock" size={24} color={Colors.accent} />,
+			iconBg: Colors.tertiary,
 		},
 	];
 
 	return (
 		<SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
 			<View style={styles.container}>
-				{/* Logo Section */}
-				<View style={styles.logoOuter}>
-					<View style={styles.logoInner}>
-						<MaterialIcons name="hearing" size={32} color={Colors.primary} />
-					</View>
-				</View>
+				<Brand />
 
-				{/* Header Section */}
 				<Text style={styles.title}>HearAble</Text>
+
 				<Text style={styles.subtitle}>
 					Aplikasi latihan mandiri untuk{"\n"}mengasah kemampuan berbicara dan
-					{"\n"}mengenali audio.
+					{"\n"}mengenali audio bagi tunarungu.
 				</Text>
 
-				{/* Features Card */}
 				<View style={styles.card}>
 					{features.map((item, index) => (
 						<View
@@ -73,19 +68,26 @@ const HearAbleScreen = () => {
 					))}
 				</View>
 
-				{/* Action Buttons */}
-				<TouchableOpacity style={styles.primaryButton} activeOpacity={0.8} onPress={() => router.push("/register")}>
+				<TouchableOpacity
+					style={styles.primaryButton}
+					activeOpacity={0.8}
+					onPress={() => router.push("/register")}
+				>
 					<Text style={styles.primaryButtonText}>Mulai sekarang</Text>
 					<Feather name="arrow-right" size={20} color={Colors.textOnPrimary} />
 				</TouchableOpacity>
 
-				<TouchableOpacity style={styles.secondaryButton} activeOpacity={0.6} onPress={() => router.push("/login")}>
+				<TouchableOpacity
+					style={styles.secondaryButton}
+					activeOpacity={0.6}
+					onPress={() => router.push("/login")}
+				>
 					<Text style={styles.secondaryButtonText}>Saya sudah punya akun</Text>
 				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	safeArea: {
@@ -96,35 +98,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: Spacing.lg,
 		alignItems: "center",
-		paddingTop: Spacing.xl,
-	},
-	logoOuter: {
-		width: 90,
-		height: 90,
-		borderRadius: Radius.full,
-		backgroundColor: Colors.secondary,
-		justifyContent: "center",
-		alignItems: "center",
-		marginBottom: Spacing.lg,
-	},
-	logoInner: {
-		width: 64,
-		height: 64,
-		borderRadius: Radius.lg,
-		backgroundColor: Colors.surface,
-		justifyContent: "center",
-		alignItems: "center",
-		shadowColor: Colors.neutral,
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.05,
-		shadowRadius: Radius.sm,
-		elevation: 2,
 	},
 	title: {
-		fontSize: FontSize.xxl,
+		fontSize: FontSize.xl,
+		color: Colors.primary,
+		textAlign: "center",
+		lineHeight: 22,
+		paddingVertical: Spacing.sm,
 		fontWeight: "800",
-		color: Colors.text,
-		marginBottom: Spacing.sm,
 	},
 	subtitle: {
 		fontSize: FontSize.md,
@@ -197,5 +178,3 @@ const styles = StyleSheet.create({
 		fontWeight: "700",
 	},
 });
-
-export default HearAbleScreen;
